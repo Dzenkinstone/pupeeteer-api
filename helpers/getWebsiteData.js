@@ -11,10 +11,7 @@ const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
         "--single-process",
         "--no-zygote",
       ],
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
+      executablePath: puppeteer.executablePath(),
     });
     const page = await browser.newPage();
     await page.goto(url);
