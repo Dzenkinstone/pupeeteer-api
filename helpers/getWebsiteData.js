@@ -4,41 +4,15 @@ const PCR = require("puppeteer-chromium-resolver");
 
 const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
   try {
-    const options = {
-      // the chromium revision to use
-      // default is puppeteer.PUPPETEER_REVISIONS.chromium
-      revision: "",
+    const PCR = require("puppeteer-chromium-resolver");
+    const puppeteer = require("puppeteer");
+    const stats = await PCR({});
+    process.env.PUPPETEER_EXECUTABLE_PATH = stats.executablePath;
 
-      // additional path to detect local chromium copy (separate with a comma if multiple paths)
-      detectionPath: "",
-
-      // custom path to download chromium to local, require dir permission: 0o777
-      // default is user home dir
-      downloadPath: "",
-
-      // the folder name for chromium snapshots (maybe there are multiple versions)
-      folderName: ".chromium-browser-snapshots",
-
-      // the stats file name, cache stats info for latest installation
-      statsName: ".pcr-stats.json",
-
-      // default hosts are ['https://storage.googleapis.com', 'https://npmmirror.com/mirrors']
-      hosts: ["https://rozetka.com.ua/"],
-
-      cacheRevisions: 2,
-      retry: 3,
-      silent: false,
-    };
-    const stats = await PCR(options);
-    const browser = await stats.puppeteer
-      .launch({
-        headless: false,
-        args: ["--no-sandbox"],
-        executablePath: stats.executablePath,
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const browser = await puppeteer.launch({
+      executablePath: stats.executablePath,
+      headless: false,
+    });
     const page = await browser.newPage();
     await page.goto(url);
 
