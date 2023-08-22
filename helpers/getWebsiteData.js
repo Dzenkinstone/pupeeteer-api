@@ -11,7 +11,6 @@ const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
         "--single-process",
         "--no-zygote",
       ],
-      executablePath: "/usr/bin/chromium-browser",
     });
     const page = await browser.newPage();
     await page.goto(url);
