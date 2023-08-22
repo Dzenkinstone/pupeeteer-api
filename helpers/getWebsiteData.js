@@ -1,18 +1,20 @@
 const { default: puppeteer } = require("puppeteer");
 const getWebsiteInformation = require("./getWebsiteInformation");
+const PCR = require("puppeteer-chromium-resolver");
 
 const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
   try {
-    const browser = await puppeteer.launch({
-      headless: false,
-      args: [
-        "--no-sandbox",
-        "--disabled-setupid-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
-      executablePath: puppeteer.executablePath(),
-    });
+    const options = {};
+    const stats = await PCR(options);
+    const browser = await stats.puppeteer
+      .launch({
+        headless: false,
+        args: ["--no-sandbox"],
+        executablePath: stats.executablePath,
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     const page = await browser.newPage();
     await page.goto(url);
 
