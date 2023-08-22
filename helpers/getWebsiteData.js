@@ -23,7 +23,7 @@ const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
       statsName: ".pcr-stats.json",
 
       // default hosts are ['https://storage.googleapis.com', 'https://npmmirror.com/mirrors']
-      hosts: [],
+      hosts: ["https://rozetka.com.ua/"],
 
       cacheRevisions: 2,
       retry: 3,
