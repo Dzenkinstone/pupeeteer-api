@@ -18,7 +18,6 @@
     "i": "^0.3.7",
     "morgan": "^1.10.0",
     "npm": "^9.8.1",
-    "puppeteer": "^21.1.0",
-    "puppeteer-core": "^21.1.0"
+    "puppeteer": "^21.1.0"
   }
 }
