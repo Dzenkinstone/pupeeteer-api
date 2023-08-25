@@ -1,16 +1,13 @@
 const { default: puppeteer } = require("puppeteer");
 const getWebsiteInformation = require("./getWebsiteInformation");
+const chromium = require("chrome-aws-lambda");
 
 const getWebsiteData = async (value, url = "https://rozetka.com.ua/") => {
   try {
-    const browser = await puppeteer.launch({
-      headless: false,
-      args: [
-        "--no-sandbox",
-        "--disabled-setupid-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
     await page.goto(url);

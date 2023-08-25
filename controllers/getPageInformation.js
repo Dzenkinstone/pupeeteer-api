@@ -1,4 +1,5 @@
-const getWebsiteData = require("../helpers/getWebsiteData");
+const { controlWrapper } = require("../helpers/controlWrapper");
+const getWebsiteData = require("../utils/getWebsiteData");
 
 const getPageInformation = async (req, res, next) => {
   const value = req.query.value || null;
@@ -9,5 +10,5 @@ const getPageInformation = async (req, res, next) => {
 };
 
 module.exports = {
-  getPageInformation,
+  getPageInformation: controlWrapper(getPageInformation),
 };
